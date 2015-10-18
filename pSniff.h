@@ -14,6 +14,7 @@
     #define DO 60002
     #define UNDO 60001
     #define REDO 60000
+    #define PACKET_SIZE 65536
     typedef struct operation
     {
 	    int flag,isFolderPresent;
