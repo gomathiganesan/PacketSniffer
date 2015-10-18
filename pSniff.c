@@ -4,6 +4,7 @@
     FILE *file;
     int tcp=0,udp=0,icmp=0,others=0,igmp=0,total=0,i,j;
     struct sockaddr_in source,dest;
+    char path[50]="/home/gomathi/pSniff/Folder",copy[7]="(copy)";
     void print_udp_packet(unsigned char *Buffer , int Size)
     {
         
@@ -115,7 +116,7 @@
 	struct iphdr *iph = (struct iphdr *)Buffer;
 	memset(&source, 0, sizeof(source));
 	source.sin_addr.s_addr = iph->saddr;
-        char path[50]="/home/gomathi/pSniff/Folder",copy[7]="(copy)", str[5];;
+        char str[5];
         memset(&dest, 0, sizeof(dest));
         dest.sin_addr.s_addr = iph->daddr;
 	unsigned short iphdrlen;
@@ -309,7 +310,7 @@
         while(1)
         {
             saddr_size = sizeof(saddr);
-            data_size = recvfrom(sock_raw , buffer , 65536 , 0 , &saddr , &saddr_size);
+            data_size = recvfrom(sock_raw , buffer ,PACKET_SIZE , 0 , &saddr , &saddr_size);
             if(data_size <0 )
             {
                 printf("Failed to get packets\n");
